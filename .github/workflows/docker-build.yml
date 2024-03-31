@@ -61,7 +61,7 @@ jobs:
       - name: Dump context
         uses: crazy-max/ghaction-dump-context@v2
       - name: Get depot tools
-        run: git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+        run: git clone -b dev https://github.com/kaidokert/depot_tools.git
       - name: Add directory to PATH
         run: echo "$GITHUB_WORKSPACE/depot_tools" >> $GITHUB_PATH
       - name: Check if it worked
@@ -71,7 +71,7 @@ jobs:
       - name: Cat gclient file
         run: cat .gclient
       - name: Gclient sync
-        run: gclient sync -v --shallow --no-history --nohooks --noprehooks -r ${{ github.ref_name }}
+        run: gclient sync -v --shallow --no-history --nohooks --noprehooks -r ${{ github.sha }}
       - name: See More things
         run: |
           ls -la
